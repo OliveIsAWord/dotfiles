@@ -10,7 +10,7 @@
       lib = nixpkgs.lib;
     in {
     nixosConfigurations = {
-      nixos = lib.nixosSystem {
+      vespera = lib.nixosSystem {
         system = "x86_64-linux";
         modules = [ ./configuration.nix ];
       };
