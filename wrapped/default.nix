@@ -5,7 +5,8 @@ users.users.olive.packages = [
     inherit pkgs;
     specialArgs = { inherit inputs; };
     modules = [
-      ./bash.nix
+      ./alacritty.nix
+      ./nushell.nix
     ];
   })
 ];

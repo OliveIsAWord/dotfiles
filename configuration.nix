@@ -99,6 +99,7 @@
     isNormalUser = true;
     description = "olive";
     extraGroups = [ "networkmanager" "wheel" ];
+    shell = pkgs.nushell;
     packages = with pkgs; [
       firefox
       emacs
@@ -115,7 +116,6 @@
       steam-run
       steam
       vlc
-      alacritty
       krita
       blender
       audacity
