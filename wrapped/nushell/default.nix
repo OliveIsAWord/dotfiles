@@ -2,6 +2,6 @@
 {
   wrappers.nushell = {
     basePackage = pkgs.nushell;
-    flags = [ "--no-config-file" ];
+    flags = [ "--config" ./config.nu "--env-config" ./env.nu "--no-history" ];
   };
 }
