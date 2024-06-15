@@ -99,7 +99,7 @@
     isNormalUser = true;
     description = "olive";
     extraGroups = [ "networkmanager" "wheel" ];
-    shell = pkgs.nushell;
+    #shell = packages.nushell;
     packages = with pkgs; [
       firefox
       emacs
