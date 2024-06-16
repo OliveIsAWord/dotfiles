@@ -19,7 +19,7 @@
   # create swap memory
   swapDevices = [ {
     device = "/var/lib/swapfile";
-    size = 4 * 1024;
+    size = 1 * 1024;
   } ];
 
   console.useXkbConfig = true;
@@ -86,13 +86,13 @@
 
   # Enable sound with pipewire.
   sound.enable = true;
-  hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+    jack.enable = true;
   };
 
   users.users.olive = {
@@ -106,8 +106,6 @@
       xorg.xmodmap
       clementine
       python312
-      rustup
-      gcc
       git
       pinta
       obs-studio
@@ -120,8 +118,8 @@
       blender
       audacity
       prismlauncher
-      ghc
       zoxide
+      hyfetch
     ];
   };
 
