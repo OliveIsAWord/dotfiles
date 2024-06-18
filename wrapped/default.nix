@@ -1,14 +1,12 @@
-{ config, lib, inputs, pkgs, ... }: {
-
-users.users.olive.packages = [
-  (inputs.wrapper-manager.lib.build {
-    inherit pkgs;
-    specialArgs = { inherit inputs; };
-    modules = [
-      ./alacritty.nix
-      # ./nushell
-    ];
-  })
-];
-
-}
+{inputs, pkgs}: let wrappers = (inputs.wrapper-manager.lib {
+      inherit pkgs;
+      specialArgs = { inherit inputs; };
+      modules = [
+        ./alacritty.nix
+        ./nushell
+      ];
+    }).config.build;
+    in
+    wrappers.packages // { all = wrappers.toplevel; }
+    
+    

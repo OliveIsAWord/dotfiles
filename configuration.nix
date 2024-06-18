@@ -124,7 +124,7 @@
       prismlauncher
       zoxide
       hyfetch
-      (wrappers.alacritty)
+      wrappers.all
     ];
   };
 

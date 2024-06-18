@@ -22,18 +22,10 @@
         system = mySystem;
         modules = [
           ./configuration.nix
-          # ./wrapped
         ];
       };
     };
     
-    packages.${mySystem} = (inputs.wrapper-manager.lib {
-      pkgs = nixpkgs.legacyPackages.${mySystem};
-      specialArgs = { inherit inputs; };
-      modules = [
-        ./wrapped/alacritty.nix
-        ./wrapped/nushell
-      ];
-    }).config.build.packages;
+    packages.${mySystem} = (import ./wrapped) { inherit inputs; pkgs = nixpkgs.legacyPackages.${mySystem}; };
   };
 }
