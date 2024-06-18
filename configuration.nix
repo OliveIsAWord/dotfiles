@@ -57,6 +57,8 @@
       EDITOR = "emacs";
       BROWSER = "firefox";
       TERM = "alacritty";
+      SHELL = "nu"; # let's see if this works; it conflicts with users.users.olive.shell
+      NIXPKGS_ALLOW_UNFREE = "1"; # hopefully this works too?
   };
   
   services.xserver.enable = true;
@@ -73,6 +75,7 @@
     noto-fonts
     noto-fonts-cjk
     noto-fonts-emoji
+    (nerdfonts.override { fonts = [ "Noto" ]; })
   ];
 
   # Configure keymap in X11

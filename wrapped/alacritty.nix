@@ -2,6 +2,6 @@
 {
   wrappers.alacritty = {
     basePackage = pkgs.alacritty;
-    flags = [ "--title" "meow!!!" ];
+    flags = [ "-o=font.size=9" "--command=nu" ];
   };
 }
