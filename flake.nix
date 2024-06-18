@@ -14,16 +14,26 @@
   outputs = inputs@{ self, nixpkgs, ... }:
     let
       lib = nixpkgs.lib;
+      mySystem = "x86_64-linux";
     in {
     nixosConfigurations = {
       vespera = lib.nixosSystem {
-        specialArgs = { inherit inputs; };
-        system = "x86_64-linux";
+        specialArgs = { inherit inputs; wrappers = self.packages.${mySystem}; };
+        system = mySystem;
         modules = [
           ./configuration.nix
-          ./wrapped
+          # ./wrapped
         ];
       };
     };
+    
+    packages.${mySystem} = (inputs.wrapper-manager.lib {
+      pkgs = nixpkgs.legacyPackages.${mySystem};
+      specialArgs = { inherit inputs; };
+      modules = [
+        ./wrapped/alacritty.nix
+        ./wrapped/nushell
+      ];
+    }).config.build.packages;
   };
 }

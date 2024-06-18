@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, wrappers, ... }:
 
 {
   imports = [
@@ -102,11 +102,8 @@
     isNormalUser = true;
     description = "olive";
     extraGroups = [ "networkmanager" "wheel" ];
-    shell = (inputs.wrapper-manager.lib.build {
-      inherit pkgs;
-      specialArgs = { inherit inputs; };
-      modules = [ ./wrapped/nushell ];
-    });
+    shell = wrappers.nushell;
+    
     packages = with pkgs; [
       firefox
       emacs
@@ -127,6 +124,7 @@
       prismlauncher
       zoxide
       hyfetch
+      (wrappers.alacritty)
     ];
   };
 
