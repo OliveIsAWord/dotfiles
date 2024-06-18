@@ -2,7 +2,7 @@
   inputs,
   pkgs,
 }: let
-  x = {
+  wrappers = inputs.wrapper-manager.lib {
     inherit pkgs;
     specialArgs = {inherit inputs;};
     modules = [
@@ -10,6 +10,6 @@
       ./nushell
     ];
   };
-  wrappers = (inputs.wrapper-manager.lib x).config.build;
+  inherit (wrappers.config) build;
 in
-  wrappers.packages // {all = wrappers.toplevel;}
+  build.packages // {all = build.toplevel;}
