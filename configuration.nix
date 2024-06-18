@@ -102,7 +102,11 @@
     isNormalUser = true;
     description = "olive";
     extraGroups = [ "networkmanager" "wheel" ];
-    #shell = packages.nushell;
+    shell = (inputs.wrapper-manager.lib.build {
+      inherit pkgs;
+      specialArgs = { inherit inputs; };
+      modules = [ ./wrapped/nushell ];
+    });
     packages = with pkgs; [
       firefox
       emacs

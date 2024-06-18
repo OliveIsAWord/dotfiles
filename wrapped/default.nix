@@ -6,7 +6,7 @@ users.users.olive.packages = [
     specialArgs = { inherit inputs; };
     modules = [
       ./alacritty.nix
-      ./nushell
+      # ./nushell
     ];
   })
 ];
