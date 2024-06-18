@@ -11,21 +11,30 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, ... }:
-    let
-      lib = nixpkgs.lib;
-      mySystem = "x86_64-linux";
-    in {
+  outputs = inputs @ {
+    self,
+    nixpkgs,
+    ...
+  }: let
+    inherit (nixpkgs) lib;
+    mySystem = "x86_64-linux";
+  in {
     nixosConfigurations = {
       vespera = lib.nixosSystem {
-        specialArgs = { inherit inputs; wrappers = self.packages.${mySystem}; };
+        specialArgs = {
+          inherit inputs;
+          wrappers = self.packages.${mySystem};
+        };
         system = mySystem;
         modules = [
           ./configuration.nix
         ];
       };
     };
-    
-    packages.${mySystem} = (import ./wrapped) { inherit inputs; pkgs = nixpkgs.legacyPackages.${mySystem}; };
+
+    packages.${mySystem} = (import ./wrapped) {
+      inherit inputs;
+      pkgs = nixpkgs.legacyPackages.${mySystem};
+    };
   };
 }

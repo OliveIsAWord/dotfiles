@@ -1,15 +1,19 @@
-{ config, pkgs, inputs, wrappers, ... }:
-
 {
+  config,
+  pkgs,
+  inputs,
+  wrappers,
+  ...
+}: {
   imports = [
     ./hardware-configuration.nix
   ];
-  
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   powerManagement = {
     enable = true;
@@ -17,14 +21,16 @@
   };
 
   # create swap memory
-  swapDevices = [ {
-    device = "/var/lib/swapfile";
-    size = 1 * 1024;
-  } ];
+  swapDevices = [
+    {
+      device = "/var/lib/swapfile";
+      size = 1 * 1024;
+    }
+  ];
 
   console.useXkbConfig = true;
 
-  boot.supportedFilesystems = [ "ntfs" ];
+  boot.supportedFilesystems = ["ntfs"];
 
   hardware.bluetooth.enable = true; # enables support for Bluetooth
   hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
@@ -36,7 +42,7 @@
   time.timeZone = "America/Boise";
   # Sync hardware clock with local time rather than UTC.
   # In particular, this keeps the Windows system clock correct.
-  time.hardwareClockInLocalTime = true;  
+  time.hardwareClockInLocalTime = true;
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
@@ -52,15 +58,15 @@
     LC_TELEPHONE = "en_US.UTF-8";
     LC_TIME = "en_US.UTF-8";
   };
-  
+
   environment.variables = {
-      EDITOR = "emacs";
-      BROWSER = "firefox";
-      TERM = "alacritty";
-      SHELL = "nu"; # let's see if this works; it conflicts with users.users.olive.shell
-      NIXPKGS_ALLOW_UNFREE = "1"; # hopefully this works too?
+    EDITOR = "emacs";
+    BROWSER = "firefox";
+    TERM = "alacritty";
+    SHELL = "nu"; # let's see if this works; it conflicts with users.users.olive.shell
+    NIXPKGS_ALLOW_UNFREE = "1"; # hopefully this works too?
   };
-  
+
   services.xserver.enable = true;
   services.xserver.displayManager.lightdm.enable = true;
   services.xserver.desktopManager.xfce.enable = true;
@@ -75,7 +81,7 @@
     noto-fonts
     noto-fonts-cjk
     noto-fonts-emoji
-    (nerdfonts.override { fonts = [ "Noto" ]; })
+    (nerdfonts.override {fonts = ["Noto"];})
   ];
 
   # Configure keymap in X11
@@ -101,9 +107,9 @@
   users.users.olive = {
     isNormalUser = true;
     description = "olive";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = ["networkmanager" "wheel"];
     shell = wrappers.nushell;
-    
+
     packages = with pkgs; [
       firefox
       emacs
@@ -136,7 +142,7 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-  
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
