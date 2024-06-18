@@ -18,6 +18,7 @@
   }: let
     inherit (nixpkgs) lib;
     mySystem = "x86_64-linux";
+    pkgs = nixpkgs.legacyPackages.${mySystem};
   in {
     nixosConfigurations = {
       vespera = lib.nixosSystem {
@@ -33,8 +34,9 @@
     };
 
     packages.${mySystem} = (import ./wrapped) {
-      inherit inputs;
-      pkgs = nixpkgs.legacyPackages.${mySystem};
+      inherit inputs pkgs;
     };
+
+    formatter.${mySystem} = pkgs.alejandra;
   };
 }
