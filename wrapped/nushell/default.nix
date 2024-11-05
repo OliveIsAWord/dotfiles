@@ -1,9 +1,13 @@
 {
   pkgs,
+  lib,
   ...
-}: {
+}: let
+  configSource = lib.strings.concatStrings (map builtins.readFile [./config.nu ./starship.nu ./zoxide.nu]);
+  configFile = pkgs.writeText "config.nu" configSource;
+in {
   wrappers.nushell = {
     basePackage = pkgs.nushell;
-    flags = ["--config" ./config.nu "--env-config" ./env.nu "--no-history"];
+    flags = ["--config" "${configFile}" "--env-config" ./env.nu];
   };
 }

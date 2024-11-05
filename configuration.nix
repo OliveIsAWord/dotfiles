@@ -130,6 +130,8 @@
       zoxide
       hyfetch
       brightnessctl
+      tokei
+      pavucontrol
       wrappers.all
     ];
   };
