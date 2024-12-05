@@ -12,7 +12,6 @@
     };
     pathAdd = [
       pkgs.starship
-      pkgs.carapace
     ];
   };
 }

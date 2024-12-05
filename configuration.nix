@@ -74,7 +74,7 @@
   };
 
   fonts.packages = with pkgs; [
-    nerd-fonts.droid-sans-mono
+    (nerdfonts.override {fonts = ["DroidSansMono"];})
   ];
 
   # Configure keymap in X11

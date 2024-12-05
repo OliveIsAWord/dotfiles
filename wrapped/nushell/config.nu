@@ -28,22 +28,6 @@ $env.config = {
       )
     }
   }
-  keybindings: [
-    {
-      name: completion_menu
-      modifier: none
-      keycode: tab
-      mode: [emacs vi_normal vi_insert]
-      event: {
-          until: [
-          { send: menu name: completion_menu }
-          { send: menunext }
-          ]
-      }
-    }
-  ]
-  color_config: {
-  }
   rm: {
     always_trash: true
   }
@@ -56,15 +40,6 @@ $env.config = {
     partial: true
     case_sensitive: false
     algorithm: "fuzzy"
-    external: (if ((which carapace | length) > 0) {
-      {
-        enable: true
-        completer: { |spans| carapace $spans.0 nushell $spans | from json }
-        max_results: 100
-      }
-    } else {
-      {}
-    })
   }
   history: {
     file_format: "sqlite"
