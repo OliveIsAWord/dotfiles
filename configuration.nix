@@ -63,18 +63,6 @@
     NIXPKGS_ALLOW_UNFREE = "1"; # hopefully this works too?
   };
 
-  services.keyd = {
-    enable = true;
-    keyboards = {
-      default = {
-        ids = ["*"];
-        settings = {
-          main = import olive_dvorak.nix;
-        };
-      };
-    };
-  };
-
   environment.sessionVariables = {NIXOS_OZONE_WL = "1";};
 
   environment.systemPackages = with pkgs; [
@@ -86,6 +74,22 @@
     rofi-wayland
     dolphin
   ];
+
+  services.xserver = {
+    enable = true;
+    displayManager.lightdm.enable = true;
+
+    xkb = {
+      layout = "olivedv";
+      options = "caps:super";
+      extraLayouts.fox = {
+        description = "Olive Dvorak";
+        languages = ["us"];
+        symbolsFile = ./olivedv_symbols.xkb;
+      };
+    };
+  };
+  console.useXkbConfig = true;
 
   programs.hyprland = {
     enable = true;

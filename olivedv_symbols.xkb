@@ -1,0 +1,62 @@
+default
+xkb_symbols "olivedv" {
+  key <TLDE> {[ asciicircum, semicolon ]};
+  key <AE01> {[ bracketleft, 0 ]};
+  key <AE02> {[ bracketright,1 ]};
+  key <AE03> {[ braceleft,   2 ]};
+  key <AE04> {[ braceright,3 ]};
+  key <AE05> {[ equal,4 ]};
+  key <AE06> {[ plus,5 ]};
+  key <AE07> {[ asterisk,6 ]};
+  key <AE08> {[ parenleft,7 ]};
+  key <AE09> {[ parenright,8 ]};
+  key <AE10> {[ asciicircum,9 ]};
+  key <AE11> {[ slash,percent ]};
+  key <AE12> {[ at,numbersign ]};
+
+  key <AD01> {[ semicolon,colon ]};
+  key <AD02> {[ odiaeresis,  Odiaeresis,   VoidSymbol,   VoidSymbol   ]};
+  key <AD03> {[ adiaeresis,  Adiaeresis,   VoidSymbol,   VoidSymbol   ]};
+  key <AD04> {[ p,           P,            VoidSymbol,   VoidSymbol   ]};
+  key <AD05> {[ y,           Y,            VoidSymbol,   VoidSymbol   ]};
+  key <AD06> {[ f,           F,            VoidSymbol,   VoidSymbol   ]};
+  key <AD07> {[ g,           G,            VoidSymbol,   VoidSymbol   ]};
+  key <AD08> {[ c,           C,            VoidSymbol,   VoidSymbol   ]};
+  key <AD09> {[ r,           R,            VoidSymbol,   VoidSymbol   ]};
+  key <AD10> {[ l,           L,            VoidSymbol,   VoidSymbol   ]};
+  key <AD11> {[ parenleft,   less,         bracketleft,  braceleft    ]};
+  key <AD12> {[ parenright,  greater,      bracketright, braceright   ]};
+
+  key <AC01> {[ a,           A,            VoidSymbol,   VoidSymbol   ]};
+  key <AC02> {[ o,           O,            VoidSymbol,   VoidSymbol   ]};
+  key <AC03> {[ e,           E,            VoidSymbol,   VoidSymbol   ]};
+  key <AC04> {[ u,           U,            VoidSymbol,   VoidSymbol   ]};
+  key <AC05> {[ i,           I,            VoidSymbol,   VoidSymbol   ]};
+  key <AC06> {[ d,           D,            VoidSymbol,   VoidSymbol   ]};
+  key <AC07> {[ h,           H,            VoidSymbol,   VoidSymbol   ]};
+  key <AC08> {[ t,           T,            VoidSymbol,   VoidSymbol   ]};
+  key <AC09> {[ n,           N,            VoidSymbol,   VoidSymbol   ]};
+  key <AC10> {[ s,           S,            VoidSymbol,   VoidSymbol   ]};
+  key <AC11> {[ exclam,      question,     exclamdown,   questiondown ]};
+  key <BKSL> {[ apostrophe,  grave,        emdash,       VoidSymbol   ]};
+
+  key <LSGT> {[ comma,       semicolon,    VoidSymbol,   VoidSymbol   ]};
+  key <AB01> {[ period,      colon,        comma,        semicolon    ]};
+  key <AB02> {[ q,           Q,            VoidSymbol,   VoidSymbol   ]};
+  key <AB03> {[ j,           J,            VoidSymbol,   VoidSymbol   ]};
+  key <AB04> {[ k,           K,            VoidSymbol,   VoidSymbol   ]};
+  key <AB05> {[ x,           X,            VoidSymbol,   VoidSymbol   ]};
+  key <AB06> {[ b,           B,            VoidSymbol,   VoidSymbol   ]};
+  key <AB07> {[ m,           M,            VoidSymbol,   VoidSymbol   ]};
+  key <AB08> {[ w,           W,            VoidSymbol,   VoidSymbol   ]};
+  key <AB09> {[ v,           V,            VoidSymbol,   VoidSymbol   ]};
+  key <AB10> {[ z,           Z,            VoidSymbol,   VoidSymbol   ]};
+
+  key <SPCE> {[ space,       space,        space,        space        ]};
+
+  include "level3(lalt_switch)"
+  key <RTSH> { [ Alt_R ] };
+  # key <RALT> { [ Super_L ] };
+  key <LWIN> { [ Super_L ] };
+  key <RWIN> { [ Shift_L ] };
+};
