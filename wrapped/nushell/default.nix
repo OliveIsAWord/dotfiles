@@ -6,12 +6,13 @@
   wrappers.nushell = {
     basePackage = pkgs.nushell;
     flags = ["--config" ./config.nu "--env-config" ./env.nu];
-    env.STARSHIP_CONFIX = {
-    force = true;
-    value = ./starship.toml; };
+    env.STARSHIP_CONFIG = {
+      force = true;
+      value = ./starship.toml;
+    };
     pathAdd = [
-        pkgs.starship
-	pkgs.carapace
+      pkgs.starship
+      pkgs.carapace
     ];
   };
 }

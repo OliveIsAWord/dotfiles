@@ -74,10 +74,7 @@
   };
 
   fonts.packages = with pkgs; [
-    noto-fonts
-    noto-fonts-cjk
-    noto-fonts-emoji
-    (nerdfonts.override {fonts = ["Noto"];})
+    nerd-fonts.droid-sans-mono
   ];
 
   # Configure keymap in X11

@@ -25,24 +25,24 @@
         specialArgs = {
           inherit inputs;
           wrappers = self.packages.${mySystem};
-	  hostname = "thresholde";
+          hostname = "thresholde";
         };
         system = mySystem;
         modules = [
           ./configuration.nix
-	  ./hardware/thresholde.nix
+          ./hardware/thresholde.nix
         ];
       };
       vespera = lib.nixosSystem {
         specialArgs = {
           inherit inputs;
           wrappers = self.packages.${mySystem};
-	  hostname = "vespera";
+          hostname = "vespera";
         };
         system = mySystem;
         modules = [
           ./configuration.nix
-	  ./hardware/vespera.nix
+          ./hardware/vespera.nix
         ];
       };
     };
