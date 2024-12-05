@@ -63,38 +63,44 @@
     NIXPKGS_ALLOW_UNFREE = "1"; # hopefully this works too?
   };
 
-  services.xserver.enable = true;
-  services.xserver.displayManager.lightdm.enable = true;
-  services.xserver.desktopManager.xfce.enable = true;
+  environment.sessionVariables = {NIXOS_OZONE_WL="1";};
 
-  # Skip entering password on boot
-  services.displayManager = {
-    autoLogin.enable = true;
-    autoLogin.user = "olive";
+  environment.systemPackages = with pkgs; [
+      waybar
+      dunst
+      libnotify
+      swww
+      kitty
+      rofi-wayland
+  ];
+
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
+
+  hardware = {opengl.enable=true;};
+
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
 
   fonts.packages = with pkgs; [
     (nerdfonts.override {fonts = ["DroidSansMono"];})
   ];
 
-  # Configure keymap in X11
-  services.xserver = {
-    xkb.layout = "us";
-    xkb.variant = "dvp";
-  };
-
   # Enable CUPS to print documents.
   services.printing.enable = true;
   # Enable sound with pipewire.
   sound.enable = true;
-  hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    # jack.enable = true;
+    jack.enable = true;
   };
 
   users.users.olive = {
