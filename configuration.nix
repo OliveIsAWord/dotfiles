@@ -78,18 +78,23 @@
   services.xserver = {
     enable = true;
     displayManager.lightdm.enable = true;
+    
 
     xkb = {
       layout = "olivedv";
-      options = "caps:super";
-      extraLayouts.fox = {
+      extraLayouts.olivedv = {
         description = "Olive Dvorak";
         languages = ["us"];
         symbolsFile = ./olivedv_symbols.xkb;
       };
     };
   };
-  console.useXkbConfig = true;
+
+  # Skip entering password on boot
+  services.displayManager = {
+    autoLogin.enable = true;
+    autoLogin.user = "olive";
+  };
 
   programs.hyprland = {
     enable = true;
@@ -149,6 +154,7 @@
       brightnessctl
       tokei
       pavucontrol
+      spotify
       wrappers.all
     ];
   };

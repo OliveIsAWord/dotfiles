@@ -1,6 +1,6 @@
 default
 xkb_symbols "olivedv" {
-  key <TLDE> {[ asciicircum, semicolon ]};
+  key <TLDE> {[ grave,dollar ]};
   key <AE01> {[ bracketleft, 0 ]};
   key <AE02> {[ bracketright,1 ]};
   key <AE03> {[ braceleft,   2 ]};
@@ -15,17 +15,18 @@ xkb_symbols "olivedv" {
   key <AE12> {[ at,numbersign ]};
 
   key <AD01> {[ semicolon,colon ]};
-  key <AD02> {[ odiaeresis,  Odiaeresis,   VoidSymbol,   VoidSymbol   ]};
-  key <AD03> {[ adiaeresis,  Adiaeresis,   VoidSymbol,   VoidSymbol   ]};
-  key <AD04> {[ p,           P,            VoidSymbol,   VoidSymbol   ]};
-  key <AD05> {[ y,           Y,            VoidSymbol,   VoidSymbol   ]};
+  key <AD02> {[ comma, less ]};
+  key <AD03> {[ period,greater ]};
+  key <AD04> {[ p,           P ]};
+  key <AD05> {[ y,           Y ]};
   key <AD06> {[ f,           F,            VoidSymbol,   VoidSymbol   ]};
   key <AD07> {[ g,           G,            VoidSymbol,   VoidSymbol   ]};
   key <AD08> {[ c,           C,            VoidSymbol,   VoidSymbol   ]};
   key <AD09> {[ r,           R,            VoidSymbol,   VoidSymbol   ]};
   key <AD10> {[ l,           L,            VoidSymbol,   VoidSymbol   ]};
-  key <AD11> {[ parenleft,   less,         bracketleft,  braceleft    ]};
-  key <AD12> {[ parenright,  greater,      bracketright, braceright   ]};
+  key <AD11> {[ exclam,question ]};
+  key <AD12> {[ ampersand,asciitilde ]};
+  key <BKSL> {[ backslash,bar ]};
 
   key <AC01> {[ a,           A,            VoidSymbol,   VoidSymbol   ]};
   key <AC02> {[ o,           O,            VoidSymbol,   VoidSymbol   ]};
@@ -37,11 +38,9 @@ xkb_symbols "olivedv" {
   key <AC08> {[ t,           T,            VoidSymbol,   VoidSymbol   ]};
   key <AC09> {[ n,           N,            VoidSymbol,   VoidSymbol   ]};
   key <AC10> {[ s,           S,            VoidSymbol,   VoidSymbol   ]};
-  key <AC11> {[ exclam,      question,     exclamdown,   questiondown ]};
-  key <BKSL> {[ apostrophe,  grave,        emdash,       VoidSymbol   ]};
+  key <AC11> {[ underscore,minus ]};
 
-  key <LSGT> {[ comma,       semicolon,    VoidSymbol,   VoidSymbol   ]};
-  key <AB01> {[ period,      colon,        comma,        semicolon    ]};
+  key <AB01> {[ apostrophe,quotedbl ]};
   key <AB02> {[ q,           Q,            VoidSymbol,   VoidSymbol   ]};
   key <AB03> {[ j,           J,            VoidSymbol,   VoidSymbol   ]};
   key <AB04> {[ k,           K,            VoidSymbol,   VoidSymbol   ]};
@@ -54,9 +53,10 @@ xkb_symbols "olivedv" {
 
   key <SPCE> {[ space,       space,        space,        space        ]};
 
-  include "level3(lalt_switch)"
-  key <RTSH> { [ Alt_R ] };
+  key <CAPS> {[ Super_L ]};
+  # include "level3(lalt_switch)"
+  # key <RTSH> { [ Alt_R ] };
   # key <RALT> { [ Super_L ] };
-  key <LWIN> { [ Super_L ] };
-  key <RWIN> { [ Shift_L ] };
+  # key <LWIN> { [ Super_L ] };
+  # key <RWIN> { [ Shift_L ] };
 };
