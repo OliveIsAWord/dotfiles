@@ -63,15 +63,28 @@
     NIXPKGS_ALLOW_UNFREE = "1"; # hopefully this works too?
   };
 
-  environment.sessionVariables = {NIXOS_OZONE_WL="1";};
+  services.keyd = {
+    enable = true;
+    keyboards = {
+      default = {
+        ids = ["*"];
+        settings = {
+          main = import olive_dvorak.nix;
+        };
+      };
+    };
+  };
+
+  environment.sessionVariables = {NIXOS_OZONE_WL = "1";};
 
   environment.systemPackages = with pkgs; [
-      waybar
-      dunst
-      libnotify
-      swww
-      kitty
-      rofi-wayland
+    waybar
+    dunst
+    libnotify
+    swww
+    kitty
+    rofi-wayland
+    dolphin
   ];
 
   programs.hyprland = {
@@ -79,11 +92,11 @@
     xwayland.enable = true;
   };
 
-  hardware = {opengl.enable=true;};
+  hardware = {opengl.enable = true;};
 
   xdg.portal = {
     enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    extraPortals = [pkgs.xdg-desktop-portal-gtk];
   };
 
   fonts.packages = with pkgs; [
