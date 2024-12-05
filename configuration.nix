@@ -1,13 +1,10 @@
 {
+  hostname,
   config,
   pkgs,
   wrappers,
   ...
 }: {
-  imports = [
-    ./hardware-configuration.nix
-  ];
-
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -35,7 +32,7 @@
   hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
   services.blueman.enable = true;
 
-  networking.hostName = "vespera"; # Define your hostname.
+  networking.hostName = hostname; # Define your hostname.
   networking.networkmanager.enable = true;
 
   time.timeZone = "America/Boise";
