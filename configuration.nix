@@ -2,9 +2,40 @@
   hostname,
   config,
   pkgs,
+  pkgs2,
   wrapped,
   ...
-}: {
+}: let
+  packages = with pkgs; [
+    firefox
+    emacs
+    clementine
+    python312
+    git
+    pinta
+    obs-studio
+    python311Packages.deemix
+    aseprite
+    steam-run
+    steam
+    vlc
+    krita
+    blender
+    audacity
+    prismlauncher
+    zoxide
+    hyfetch
+    brightnessctl
+    tokei
+    pavucontrol
+    spotify
+    nvd
+    wrapped.all
+  ];
+  packages2 = with pkgs2; [
+    radicle-node
+  ];
+in {
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -132,31 +163,7 @@
     extraGroups = ["networkmanager" "wheel"];
     shell = wrapped.nushell;
 
-    packages = with pkgs; [
-      firefox
-      emacs
-      clementine
-      python312
-      git
-      pinta
-      obs-studio
-      python311Packages.deemix
-      aseprite
-      steam-run
-      steam
-      vlc
-      krita
-      blender
-      audacity
-      prismlauncher
-      zoxide
-      hyfetch
-      brightnessctl
-      tokei
-      pavucontrol
-      spotify
-      wrapped.all
-    ];
+    packages = packages; # ++ packages2;
   };
 
   programs.steam = {

@@ -16,38 +16,26 @@
     nixpkgs,
     ...
   }: let
-    inherit (nixpkgs) lib;
-    mySystem = "x86_64-linux";
-    pkgs = nixpkgs.legacyPackages.${mySystem};
-    wrapped = (import ./wrapped) {
-      inherit inputs pkgs;
-    };
+    allSystems = nixpkgs: output:
+      nixpkgs.lib.genAttrs nixpkgs.lib.systems.flakeExposed
+      (system: output nixpkgs.legacyPackages.${system});
+    mapHost = hostname: {system}: let
+      pkgs = nixpkgs.legacyPackages.${system};
+      wrapped = (import ./wrapped) {
+        inherit inputs pkgs;
+      };
+    in
+      nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = {inherit inputs wrapped hostname;};
+        modules = [
+          ./configuration.nix
+          ./hardware/${hostname}.nix
+        ];
+      };
+    hosts = import ./hosts.nix;
   in {
-    nixosConfigurations = {
-      thresholde = lib.nixosSystem {
-        specialArgs = {
-          inherit inputs wrapped;
-          hostname = "thresholde";
-        };
-        system = mySystem;
-        modules = [
-          ./configuration.nix
-          ./hardware/thresholde.nix
-        ];
-      };
-      vespera = lib.nixosSystem {
-        specialArgs = {
-          inherit inputs wrapped;
-          hostname = "vespera";
-        };
-        system = mySystem;
-        modules = [
-          ./configuration.nix
-          ./hardware/vespera.nix
-        ];
-      };
-    };
-
-    formatter.${mySystem} = pkgs.alejandra;
+    nixosConfigurations = builtins.mapAttrs mapHost hosts;
+    formatter = allSystems nixpkgs (pkgs: pkgs.alejandra);
   };
 }
