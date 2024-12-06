@@ -7,7 +7,6 @@
   ...
 }: let
   packages = with pkgs; [
-    firefox
     emacs
     clementine
     python312
@@ -34,6 +33,7 @@
   ];
   packages2 = with pkgs2; [
     radicle-node
+    firefox
   ];
 in {
   # Bootloader.
