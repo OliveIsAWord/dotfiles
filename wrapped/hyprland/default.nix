@@ -19,6 +19,5 @@
       })
       keys);
 in {
-  # wrappers = createAttrSet mapHot hotConfigged // hyprlandWrapped;
-  wrappers = hyprlandWrapped;
+  wrappers = createAttrSet mapHot hotConfigged // hyprlandWrapped;
 }

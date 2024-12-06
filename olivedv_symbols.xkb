@@ -54,9 +54,9 @@ xkb_symbols "olivedv" {
   key <SPCE> {[ space,       space,        space,        space        ]};
 
   key <CAPS> {[ Super_L ]};
+  key <RALT> { [ Super_L ] };
   # include "level3(lalt_switch)"
   # key <RTSH> { [ Alt_R ] };
-  # key <RALT> { [ Super_L ] };
   # key <LWIN> { [ Super_L ] };
   # key <RWIN> { [ Shift_L ] };
 };

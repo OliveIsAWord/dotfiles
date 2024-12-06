@@ -36,10 +36,7 @@ $env.config = {
     index_mode: auto
   }
   completions: {
-    quick: true
-    partial: true
-    case_sensitive: false
-    algorithm: "fuzzy"
+    case_sensitive: true
   }
   history: {
     file_format: "sqlite"
