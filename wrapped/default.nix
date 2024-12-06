@@ -1,10 +1,10 @@
 {
   inputs,
-  pkgs,
+  pkgs1,
   pkgs2,
 }: let
   wrappers = inputs.wrapper-manager.lib {
-    inherit pkgs;
+    pkgs = pkgs1;
     specialArgs = {inherit inputs;};
     modules = [
       ./alacritty.nix

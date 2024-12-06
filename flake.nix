@@ -18,19 +18,22 @@
     nixpkgs2,
     ...
   }: let
-    allSystems = nixpkgs: output:
-      nixpkgs.lib.genAttrs nixpkgs.lib.systems.flakeExposed
-      (system: output nixpkgs.legacyPackages.${system});
+    allSystems = nixpkgsN: output:
+      nixpkgs2.lib.genAttrs nixpkgs2.lib.systems.flakeExposed
+      (system: output nixpkgsN.legacyPackages.${system});
     mapHost = hostname: {system}: let
-      pkgs = nixpkgs.legacyPackages.${system};
+      pkgs1 = import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      };
       pkgs2 = nixpkgs2.legacyPackages.${system};
       wrapped = (import ./wrapped) {
-        inherit inputs pkgs pkgs2;
+        inherit inputs pkgs1 pkgs2;
       };
     in
       nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = {inherit inputs wrapped hostname pkgs2;};
+        specialArgs = {inherit inputs wrapped hostname pkgs1 pkgs2;};
         modules = [
           ./configuration.nix
           ./hardware/${hostname}.nix
@@ -39,6 +42,6 @@
     hosts = import ./hosts.nix;
   in {
     nixosConfigurations = builtins.mapAttrs mapHost hosts;
-    formatter = allSystems nixpkgs (pkgs: pkgs.alejandra);
+    formatter = allSystems nixpkgs2 (pkgs: pkgs.alejandra);
   };
 }

@@ -1,19 +1,23 @@
 {
   hostname,
   config,
-  pkgs,
+  pkgs1,
   pkgs2,
   wrapped,
   ...
 }: let
-  packages = with pkgs; [
+  packages1 = with pkgs1; [
+    waybar
+    dunst
+    libnotify
+    swww
+    kitty
+    rofi-wayland
+    dolphin
+
     emacs
     clementine
-    python312
-    git
-    pinta
     obs-studio
-    python311Packages.deemix
     aseprite
     steam-run
     steam
@@ -23,18 +27,22 @@
     audacity
     prismlauncher
     zoxide
-    hyfetch
     brightnessctl
-    tokei
     pavucontrol
     spotify
-    nvd
-    wrapped.all
   ];
   packages2 = with pkgs2; [
     radicle-node
     firefox
+    nvd
+    hyfetch
+    tokei
+    git
+    pinta
+    python312
+    python312Packages.deemix
   ];
+  allPackages = packages1 ++ packages2 ++ [wrapped.all];
 in {
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -96,15 +104,7 @@ in {
 
   environment.sessionVariables = {NIXOS_OZONE_WL = "1";};
 
-  environment.systemPackages = with pkgs; [
-    waybar
-    dunst
-    libnotify
-    swww
-    kitty
-    rofi-wayland
-    dolphin
-  ];
+  environment.systemPackages = allPackages;
 
   services.xserver = {
     enable = true;
@@ -137,11 +137,11 @@ in {
 
   xdg.portal = {
     enable = true;
-    extraPortals = [pkgs.xdg-desktop-portal-gtk];
+    extraPortals = [pkgs1.xdg-desktop-portal-gtk];
   };
 
-  fonts.packages = with pkgs; [
-    (nerdfonts.override {fonts = ["DroidSansMono"];})
+  fonts.packages = [
+    (pkgs1.nerdfonts.override {fonts = ["DroidSansMono"];})
   ];
 
   # Enable CUPS to print documents.
@@ -162,8 +162,6 @@ in {
     description = "olive";
     extraGroups = ["networkmanager" "wheel"];
     shell = wrapped.nushell;
-
-    packages = packages ++ packages2;
   };
 
   programs.steam = {
