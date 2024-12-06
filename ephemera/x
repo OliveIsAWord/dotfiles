@@ -1,0 +1,2 @@
+#!/bin/sh
+cp ~/dotfiles/ephemera/* ~/.config/hypr/
