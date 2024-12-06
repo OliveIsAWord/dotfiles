@@ -19,12 +19,14 @@
     inherit (nixpkgs) lib;
     mySystem = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${mySystem};
+    wrapped = (import ./wrapped) {
+      inherit inputs pkgs;
+    };
   in {
     nixosConfigurations = {
       thresholde = lib.nixosSystem {
         specialArgs = {
-          inherit inputs;
-          wrappers = self.packages.${mySystem};
+          inherit inputs wrapped;
           hostname = "thresholde";
         };
         system = mySystem;
@@ -35,8 +37,7 @@
       };
       vespera = lib.nixosSystem {
         specialArgs = {
-          inherit inputs;
-          wrappers = self.packages.${mySystem};
+          inherit inputs wrapped;
           hostname = "vespera";
         };
         system = mySystem;
@@ -45,10 +46,6 @@
           ./hardware/vespera.nix
         ];
       };
-    };
-
-    packages.${mySystem} = (import ./wrapped) {
-      inherit inputs pkgs;
     };
 
     formatter.${mySystem} = pkgs.alejandra;

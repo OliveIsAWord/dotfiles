@@ -8,6 +8,7 @@
     modules = [
       ./alacritty.nix
       ./nushell
+      ./hyprland
     ];
   };
   inherit (wrappers.config) build;

@@ -2,7 +2,7 @@
   hostname,
   config,
   pkgs,
-  wrappers,
+  wrapped,
   ...
 }: {
   # Bootloader.
@@ -78,7 +78,6 @@
   services.xserver = {
     enable = true;
     displayManager.lightdm.enable = true;
-    
 
     xkb = {
       layout = "olivedv";
@@ -98,7 +97,9 @@
 
   programs.hyprland = {
     enable = true;
-    xwayland.enable = true;
+    package = wrapped.hyprland // {override = _: wrapped.hyprland;}; # chat is she a true nixoser yet
+    # we enable xwayland in the wrapper
+    # xwayland.enable = true;
   };
 
   hardware = {opengl.enable = true;};
@@ -129,12 +130,11 @@
     isNormalUser = true;
     description = "olive";
     extraGroups = ["networkmanager" "wheel"];
-    shell = wrappers.nushell;
+    shell = wrapped.nushell;
 
     packages = with pkgs; [
       firefox
       emacs
-      xorg.xmodmap
       clementine
       python312
       git
@@ -155,7 +155,7 @@
       tokei
       pavucontrol
       spotify
-      wrappers.all
+      wrapped.all
     ];
   };
 
