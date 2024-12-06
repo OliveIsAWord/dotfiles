@@ -163,7 +163,7 @@ in {
     extraGroups = ["networkmanager" "wheel"];
     shell = wrapped.nushell;
 
-    packages = packages; # ++ packages2;
+    packages = packages ++ packages2;
   };
 
   programs.steam = {

@@ -1,6 +1,7 @@
 {
   inputs,
   pkgs,
+  pkgs2,
 }: let
   wrappers = inputs.wrapper-manager.lib {
     inherit pkgs;
