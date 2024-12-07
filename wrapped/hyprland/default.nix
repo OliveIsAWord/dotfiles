@@ -6,7 +6,6 @@
   hotConfigged = [
     "hypridle"
     "hyprlock"
-    "hyprpaper"
     "hyprpicker"
     "hyprshot"
   ];

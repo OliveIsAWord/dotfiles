@@ -28,10 +28,10 @@
       };
       pkgs2 = nixpkgs2.legacyPackages.${system};
       wrapped = (import ./wrapped) {
-        inherit inputs pkgs1 pkgs2;
+        inherit inputs pkgs2;
       };
     in
-      nixpkgs.lib.nixosSystem {
+      nixpkgs2.lib.nixosSystem {
         inherit system;
         specialArgs = {inherit inputs wrapped hostname pkgs1 pkgs2;};
         modules = [

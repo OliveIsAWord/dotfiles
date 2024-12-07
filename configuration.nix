@@ -7,14 +7,6 @@
   ...
 }: let
   packages1 = with pkgs1; [
-    waybar
-    dunst
-    libnotify
-    swww
-    kitty
-    rofi-wayland
-    dolphin
-
     emacs
     clementine
     obs-studio
@@ -41,6 +33,12 @@
     pinta
     python312
     python312Packages.deemix
+    waybar
+    dunst
+    libnotify
+    swww
+    rofi-wayland
+    dolphin
   ];
   allPackages = packages1 ++ packages2 ++ [wrapped.all];
 in {
@@ -133,11 +131,9 @@ in {
     # xwayland.enable = true;
   };
 
-  hardware = {opengl.enable = true;};
-
   xdg.portal = {
     enable = true;
-    extraPortals = [pkgs1.xdg-desktop-portal-gtk];
+    extraPortals = [pkgs2.xdg-desktop-portal-gtk];
   };
 
   fonts.packages = [
@@ -146,8 +142,6 @@ in {
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
-  # Enable sound with pipewire.
-  sound.enable = true;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
