@@ -8,9 +8,6 @@
 }: let
   packages1 = with pkgs1; [
     emacs
-    clementine
-    obs-studio
-    aseprite
     steam-run
     steam
     vlc
@@ -39,6 +36,13 @@
     swww
     rofi-wayland
     dolphin
+    obs-studio
+    gparted
+    dust
+    hyprpolkitagent
+    clementine
+    aseprite
+    vesktop
   ];
   allPackages = packages1 ++ packages2 ++ [wrapped.all];
 in {
@@ -72,7 +76,8 @@ in {
   networking.hostName = hostname; # Define your hostname.
   networking.networkmanager.enable = true;
 
-  time.timeZone = "America/Boise";
+  # automatically switch timezones based on GPS.
+  services.automatic-timezoned.enable = true;
   # Sync hardware clock with local time rather than UTC.
   # In particular, this keeps the Windows system clock correct.
   time.hardwareClockInLocalTime = true;
@@ -140,9 +145,13 @@ in {
     (pkgs1.nerdfonts.override {fonts = ["DroidSansMono"];})
   ];
 
+  # Let certain processes such as PulseAudio run at realtime priority
+  security.rtkit.enable = true;
+
+  security.polkit.enable = true;
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
-  security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
     alsa.enable = true;

@@ -26,7 +26,10 @@
         inherit system;
         config.allowUnfree = true;
       };
-      pkgs2 = nixpkgs2.legacyPackages.${system};
+      pkgs2 = import nixpkgs2 {
+        inherit system;
+        config.allowUnfree = true;
+      };
       wrapped = (import ./wrapped) {
         inherit inputs pkgs2;
       };
