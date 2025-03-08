@@ -8,8 +8,6 @@
 }: let
   packages1 = with pkgs1; [
     emacs
-    steam-run
-    steam
     vlc
     krita
     blender
@@ -43,6 +41,8 @@
     clementine
     aseprite
     vesktop
+    steam-run
+    steam
   ];
   allPackages = packages1 ++ packages2 ++ [wrapped.all];
 in {
@@ -158,6 +158,19 @@ in {
     alsa.support32Bit = true;
     pulse.enable = true;
     jack.enable = true;
+  };
+
+  # Enable SSH
+  services.openssh = {
+    enable = true;
+    ports = [ 22 ];
+    settings = {
+      PasswordAuthentication = true;
+      AllowUsers = null; # Allows all users by default. Can be [ "user1" "user2" ]
+      UseDns = true;
+      X11Forwarding = false;
+      PermitRootLogin = "no"; # "yes", "without-password", "prohibit-password", "forced-commands-only", "no"
+    };
   };
 
   users.users.olive = {
